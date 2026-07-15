@@ -153,7 +153,7 @@
             if (result.ok) {
                 window.location.href = '/gracias';
             } else {
-                alert('Error al enviar: ' + (result.error || 'Intente de nuevo'));
+                alert(result.error || 'Error al enviar. Intente de nuevo.');
                 btnSubmit.disabled = false;
                 btnSubmit.textContent = 'Enviar Respuestas';
             }

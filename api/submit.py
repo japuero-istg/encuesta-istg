@@ -14,6 +14,12 @@ async def submit(respuesta: RespuestaEncuesta, request: Request):
     if respuesta.email:
         respuesta.email = respuesta.email.strip().lower()
 
+    existing = await database.execute_one(
+        "SELECT id FROM respuestas WHERE email = $1", respuesta.email
+    )
+    if existing:
+        return JSONResponse(status_code=409, content={"ok": False, "error": "Este email ya fue registrado. No se permiten respuestas duplicadas."})
+
     ua = request.headers.get("user-agent", "")
 
     query = """
@@ -22,17 +28,6 @@ async def submit(respuesta: RespuestaEncuesta, request: Request):
             p1, p2, p3, p4, p5, p6, p7, p7b, p8, p9,
             p10_mejoras, user_agent, duracion_segundos
         ) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17,$18,$19)
-        ON CONFLICT (email) DO UPDATE SET
-            tiene_app = EXCLUDED.tiene_app,
-            es_emprendedor = EXCLUDED.es_emprendedor,
-            profesion = EXCLUDED.profesion,
-            edad_rango = EXCLUDED.edad_rango,
-            barrio = EXCLUDED.barrio,
-            p1 = EXCLUDED.p1, p2 = EXCLUDED.p2, p3 = EXCLUDED.p3,
-            p4 = EXCLUDED.p4, p5 = EXCLUDED.p5, p6 = EXCLUDED.p6,
-            p7 = EXCLUDED.p7, p7b = EXCLUDED.p7b, p8 = EXCLUDED.p8, p9 = EXCLUDED.p9,
-            p10_mejoras = EXCLUDED.p10_mejoras,
-            created_at = NOW()
         RETURNING id
     """
 

@@ -29,11 +29,19 @@
         </main>
 
         <footer class="site-footer">
+            <div class="footer-counter">
+                <span id="counterValue">-</span> respuestas registradas
+            </div>
             <a href="https://pucusoft.pages.dev/" target="_blank" rel="noopener noreferrer" class="footer-link">
                 <img src="/static/img/pucusoft.png" alt="Pucusoft" class="footer-logo">
                 <span>Desarrollado por Pucusoft</span>
             </a>
         </footer>
+        <script>
+            fetch('/api/count').then(r=>r.json()).then(d=>{
+                document.getElementById('counterValue').textContent = d.total;
+            }).catch(()=>{});
+        </script>
     </div>
 </body>
 </html>

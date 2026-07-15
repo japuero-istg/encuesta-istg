@@ -2,8 +2,10 @@ from fastapi import FastAPI, Depends, HTTPException, Request
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 from fastapi.security import HTTPBasic, HTTPBasicCredentials
+from fastapi.responses import JSONResponse
 
 import config
+import database
 from api.submit import router as submit_router
 from api.stats import router as stats_router
 from api.export import router as export_router
@@ -39,3 +41,9 @@ async def gracias(request: Request):
 @app.get("/dashboard")
 async def dashboard(request: Request, _=Depends(verificar_auth)):
     return templates.TemplateResponse("dashboard.html", {"request": request})
+
+
+@app.get("/api/count")
+async def count():
+    total = await database.execute_insert("SELECT count(*) FROM respuestas")
+    return {"total": int(total)}

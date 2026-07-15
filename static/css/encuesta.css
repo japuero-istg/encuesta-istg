@@ -14,7 +14,9 @@ body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:#f1f5f
 .header-emprende{font-size:1.1rem;font-weight:700;letter-spacing:0.5px;color:#93c5fd}
 
 /* ─── Site Footer ─── */
-.site-footer{background:#1e293b;color:#94a3b8;padding:1rem 1.5rem;text-align:center;margin-top:auto}
+.site-footer{background:#1e293b;color:#94a3b8;padding:1rem 1.5rem;text-align:center;margin-top:auto;display:flex;flex-direction:column;align-items:center;gap:0.5rem}
+.footer-counter{font-size:0.8rem;color:#64748b}
+.footer-counter span{color:#22c55e;font-weight:bold;font-size:1rem}
 .footer-link{display:inline-flex;align-items:center;gap:0.75rem;color:#94a3b8;text-decoration:none;transition:color 0.2s}
 .footer-link:hover{color:#fff}
 .footer-logo{height:36px;width:auto;border-radius:4px;filter:brightness(0) invert(1);opacity:0.8;transition:opacity 0.2s}
