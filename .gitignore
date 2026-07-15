@@ -28,3 +28,8 @@ respuestas.json
 
 # Render
 render.yaml
+
+# Documentación técnica (no se sube)
+DOCUMENTO_TECNICO.md
+DOCUMENTO_TECNICO.docx
+generar_docx.py
