@@ -1,0 +1,152 @@
+/* ─── Reset & Base ─── */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:#f1f5f9;color:#1e293b;line-height:1.6;min-height:100vh}
+.site-wrapper{display:flex;flex-direction:column;min-height:100vh}
+.site-main{flex:1}
+
+/* ─── Site Header ─── */
+.site-header{background:#1e3a5f;color:#fff;padding:0.75rem 1.5rem;box-shadow:0 2px 8px rgba(0,0,0,0.15)}
+.header-content{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between}
+.header-left,.header-right{display:flex;align-items:center;gap:0.75rem}
+.header-logo{height:50px;width:auto;border-radius:6px;background:#fff;padding:4px}
+.header-text{display:flex;flex-direction:column}
+.header-instituto{font-size:0.85rem;font-weight:500;opacity:0.9}
+.header-emprende{font-size:1.1rem;font-weight:700;letter-spacing:0.5px;color:#93c5fd}
+
+/* ─── Site Footer ─── */
+.site-footer{background:#1e293b;color:#94a3b8;padding:1rem 1.5rem;text-align:center;margin-top:auto}
+.footer-link{display:inline-flex;align-items:center;gap:0.75rem;color:#94a3b8;text-decoration:none;transition:color 0.2s}
+.footer-link:hover{color:#fff}
+.footer-logo{height:36px;width:auto;border-radius:4px;filter:brightness(0) invert(1);opacity:0.8;transition:opacity 0.2s}
+.footer-link:hover .footer-logo{opacity:1}
+.footer-link span{font-size:0.85rem}
+
+/* ─── Encuesta Container ─── */
+.encuesta-container{max-width:800px;margin:0 auto;padding:1.5rem}
+.encuesta-header{text-align:center;margin-bottom:2rem}
+.encuesta-header h1{font-size:1.75rem;color:#1e3a5f;margin-bottom:0.25rem}
+.subtitle{color:#64748b;font-size:0.95rem}
+
+/* ─── Progress Bar ─── */
+.progress-bar{width:100%;height:8px;background:#e2e8f0;border-radius:999px;overflow:hidden;margin-bottom:0.5rem}
+.progress-fill{height:100%;background:linear-gradient(90deg,#2563eb,#16a34a);width:16.66%;transition:width 0.4s ease;border-radius:999px}
+.progress-text{text-align:center;font-size:0.85rem;color:#64748b;margin-bottom:1.5rem}
+
+/* ─── Steps ─── */
+.step{display:none;animation:fadeIn 0.3s ease}
+.step.active{display:block}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+
+.step h2{font-size:1.35rem;color:#1e3a5f;margin-bottom:0.5rem;padding-bottom:0.5rem;border-bottom:2px solid #e2e8f0}
+.step-hint{font-size:0.85rem;color:#64748b;margin-bottom:1.5rem;font-style:italic}
+
+/* ─── Consent ─── */
+.consent-text{background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:1.25rem;margin-bottom:1.5rem;font-size:0.9rem}
+.consent-text p{margin-bottom:0.75rem}
+.checkbox-label{display:flex;align-items:flex-start;gap:0.75rem;cursor:pointer;font-weight:500;padding:1rem;background:#f0fdf4;border:2px solid #bbf7d0;border-radius:12px;transition:all 0.2s}
+.checkbox-label:hover{border-color:#16a34a}
+.checkbox-label input[type="checkbox"]{width:20px;height:20px;margin-top:2px;accent-color:#16a34a}
+
+/* ─── Radio Cards (Filtrado) ─── */
+.radio-group{display:flex;gap:1rem;margin-top:0.5rem}
+.radio-card{display:flex;align-items:center;gap:0.75rem;padding:1rem 1.5rem;border:2px solid #e2e8f0;border-radius:12px;cursor:pointer;transition:all 0.2s;flex:1;justify-content:center}
+.radio-card:hover{border-color:#93c5fd;background:#eff6ff}
+.radio-card:has(input:checked){border-color:#2563eb;background:#dbeafe;font-weight:600}
+.radio-card input[type="radio"]{accent-color:#2563eb;width:20px;height:20px}
+.radio-label{font-size:1.1rem;color:#1e293b}
+
+/* ─── Form Groups ─── */
+.form-group{margin-bottom:1.25rem}
+.form-group label{display:block;font-weight:600;margin-bottom:0.4rem;font-size:0.95rem}
+.form-group input[type="email"],
+.form-group select,
+.form-group textarea{width:100%;padding:0.75rem 1rem;border:2px solid #e2e8f0;border-radius:10px;font-size:0.95rem;transition:border-color 0.2s;background:#fff}
+.form-group input:focus,.form-group select:focus,.form-group textarea:focus{outline:none;border-color:#2563eb;box-shadow:0 0 0 3px rgba(37,99,235,0.1)}
+.form-group textarea{resize:vertical;min-height:100px}
+.char-count{display:block;text-align:right;font-size:0.8rem;color:#94a3b8;margin-top:0.25rem}
+
+/* ─── Likert Scale ─── */
+.likert-group{background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:1.25rem;margin-bottom:1rem;transition:border-color 0.2s}
+.likert-group.has-error{border-color:#dc2626}
+.pregunta{font-size:0.95rem;font-weight:500;margin-bottom:1rem;line-height:1.5;color:#1e293b}
+.likert-options{display:grid;grid-template-columns:repeat(5,1fr);gap:0.5rem;text-align:center}
+.likert-options label{display:flex;flex-direction:column;align-items:center;gap:0.25rem;padding:0.75rem 0.25rem;border:2px solid #e2e8f0;border-radius:10px;cursor:pointer;transition:all 0.2s}
+.likert-options label:hover{border-color:#93c5fd;background:#eff6ff}
+.likert-options label:has(input:checked){border-color:#2563eb;background:#dbeafe;font-weight:600}
+.likert-options input[type="radio"]{accent-color:#2563eb;width:18px;height:18px}
+.likert-options span{font-size:1.1rem;font-weight:700;color:#1e3a5f}
+.likert-options small{font-size:0.7rem;color:#64748b;line-height:1.2}
+
+.error-msg{display:block;color:#dc2626;font-size:0.8rem;margin-top:0.25rem;min-height:1.1rem}
+
+/* ─── Navigation Buttons ─── */
+.nav-buttons{display:flex;justify-content:space-between;margin-top:2rem;padding-top:1.5rem;border-top:2px solid #e2e8f0}
+.btn{padding:0.75rem 1.5rem;border:none;border-radius:10px;font-size:1rem;font-weight:600;cursor:pointer;transition:all 0.2s}
+.btn-primary{background:#2563eb;color:#fff}.btn-primary:hover{background:#1d4ed8}
+.btn-secondary{background:#e2e8f0;color:#475569}.btn-secondary:hover{background:#cbd5e1}
+.btn-submit{background:#16a34a;color:#fff;padding:0.75rem 2rem}.btn-submit:hover{background:#15803d}
+.btn-sm{padding:0.4rem 1rem;font-size:0.85rem;border-radius:8px;background:#e2e8f0;color:#475569;text-decoration:none;display:inline-block;border:none;cursor:pointer}.btn-sm:hover,.btn-sm.active{background:#2563eb;color:#fff}
+
+/* ─── Gracias ─── */
+.gracias-card{text-align:center;padding:3rem 1.5rem;background:#fff;border-radius:16px;border:1px solid #e2e8f0;margin-top:2rem}
+.gracias-icon{width:80px;height:80px;background:#dcfce7;color:#16a34a;font-size:2.5rem;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 1.5rem;font-weight:bold}
+.gracias-card h1{font-size:1.5rem;color:#1e3a5f;margin-bottom:0.5rem}
+.gracias-sub{color:#64748b;font-size:0.9rem;margin-top:0.5rem}
+
+/* ─── Dashboard ─── */
+.dashboard-container{max-width:1200px;margin:0 auto;padding:1.5rem}
+.dashboard-header{text-align:center;margin-bottom:2rem;position:relative}
+.dashboard-header h1{font-size:1.75rem;color:#1e3a5f}
+.dashboard-header p{color:#64748b;font-size:0.95rem}
+.export-buttons{position:absolute;right:0;top:50%;transform:translateY(-50%);display:flex;gap:0.5rem}
+
+.stats-summary{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1rem;margin-bottom:2rem}
+.stat-card{background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:1.25rem;text-align:center}
+.stat-card h3{font-size:2rem;color:#2563eb}
+.stat-card p{color:#64748b;font-size:0.85rem}
+
+.demografia-section,.bloques-section{background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:1.5rem;margin-bottom:1.5rem}
+.demografia-section h2,.bloques-section h2{font-size:1.25rem;color:#1e3a5f;margin-bottom:1rem;padding-bottom:0.5rem;border-bottom:2px solid #e2e8f0}
+
+.charts-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:1rem;margin-top:1rem}
+.chart-box{background:#f8fafc;border-radius:8px;padding:0.5rem;min-height:250px}
+.chart-wide{grid-column:1/-1}
+
+.bloque-nav{display:flex;gap:0.5rem;margin-bottom:1rem;flex-wrap:wrap}
+.bloque-summary{display:flex;gap:2rem;font-size:0.95rem;margin-bottom:1rem;padding:0.75rem 1rem;background:#f0f9ff;border-radius:8px}
+
+.stats-table{width:100%;border-collapse:collapse;font-size:0.9rem}
+.stats-table th{background:#f1f5f9;padding:0.6rem 0.75rem;text-align:left;font-weight:600;border-bottom:2px solid #e2e8f0}
+.stats-table td{padding:0.6rem 0.75rem;border-bottom:1px solid #f1f5f9}
+.stats-table tr:hover td{background:#f8fafc}
+
+/* ─── Matriz ConsolidarEscalaLikert ─── */
+.matriz-table{font-size:0.85rem;border-collapse:collapse}
+.matriz-table th{background:#f1f5f9;padding:0.5rem 0.4rem;font-size:0.8rem;border-bottom:2px solid #e2e8f0;white-space:nowrap}
+.matriz-table td{padding:0.5rem 0.4rem;border-bottom:1px solid #f1f5f9;white-space:nowrap}
+.matriz-table tr:hover td{background:#f8fafc !important}
+
+/* ─── PNG Button ─── */
+.btn-png{background:#7c3aed;color:#fff}.btn-png:hover{background:#6d28d9}
+.btn-png-inline{position:absolute;top:0.5rem;right:0.5rem;padding:0.2rem 0.6rem;font-size:0.7rem;background:#7c3aed;color:#fff;border:none;border-radius:6px;cursor:pointer;z-index:10;opacity:0.7;transition:opacity 0.2s}
+.btn-png-inline:hover{opacity:1}
+
+.loading,.error{text-align:center;padding:2rem;color:#64748b;font-style:italic}
+.error{color:#dc2626}
+
+/* ─── Responsive ─── */
+@media(max-width:640px){
+    .header-content{flex-direction:column;gap:0.5rem}
+    .header-left,.header-right{gap:0.5rem}
+    .header-logo{height:40px}
+    .header-instituto{font-size:0.75rem}
+    .header-emprende{font-size:0.95rem}
+    .likert-options{grid-template-columns:repeat(5,1fr);gap:0.25rem}
+    .likert-options small{font-size:0.6rem}
+    .likert-options span{font-size:0.95rem}
+    .encuesta-header h1{font-size:1.4rem}
+    .export-buttons{position:static;transform:none;justify-content:center;margin-top:1rem}
+    .charts-grid{grid-template-columns:1fr}
+    .bloque-nav{flex-direction:column}
+    .stats-summary{grid-template-columns:1fr 1fr}
+}
