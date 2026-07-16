@@ -25,9 +25,9 @@ async def submit(respuesta: RespuestaEncuesta, request: Request):
     query = """
         INSERT INTO respuestas (
             email, tiene_app, es_emprendedor, profesion, edad_rango, barrio,
-            p1, p2, p3, p4, p5, p6, p7, p7b, p8, p9,
+            p1, p2, p3, p4, p5, p6, p7, p8, p9,
             p10_mejoras, user_agent, duracion_segundos
-        ) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17,$18,$19)
+        ) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17,$18)
         RETURNING id
     """
 
@@ -40,7 +40,7 @@ async def submit(respuesta: RespuestaEncuesta, request: Request):
         respuesta.edad_rango,
         respuesta.barrio,
         respuesta.p1, respuesta.p2, respuesta.p3,
-        respuesta.p4, respuesta.p5, respuesta.p6, respuesta.p7, respuesta.p7b,
+        respuesta.p4, respuesta.p5, respuesta.p6, respuesta.p7,
         respuesta.p8, respuesta.p9,
         respuesta.p10_mejoras[:1000],
         ua,

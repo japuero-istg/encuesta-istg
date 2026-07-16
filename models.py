@@ -23,7 +23,6 @@ class RespuestaEncuesta(BaseModel):
     p5: conint(ge=1, le=5)
     p6: conint(ge=1, le=5)
     p7: conint(ge=1, le=5)
-    p7b: conint(ge=1, le=5)
     p8: conint(ge=1, le=5)
     p9: conint(ge=1, le=5)
     p10_mejoras: str = ""

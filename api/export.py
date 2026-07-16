@@ -36,7 +36,7 @@ async def exportar(format: str = "json", _=Depends(verificar_auth)):
             "barrio": r["barrio"],
             "p1": r["p1"], "p2": r["p2"], "p3": r["p3"],
             "p4": r["p4"], "p5": r["p5"], "p6": r["p6"],
-            "p7": r["p7"], "p7b": r["p7b"],
+            "p7": r["p7"],
             "p8": r["p8"], "p9": r["p9"],
             "p10_mejoras": r["p10_mejoras"],
             "duracion_segundos": r["duracion_segundos"],

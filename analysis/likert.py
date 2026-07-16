@@ -58,36 +58,35 @@ def alpha_cronbach(matriz: list[list[int]]) -> float:
 
 
 ITEMS_BLOQUE_A = ["p1", "p2", "p3"]
-ITEMS_BLOQUE_B = ["p4", "p5", "p6", "p7", "p7b"]
+ITEMS_BLOQUE_B = ["p4", "p5", "p6", "p7"]
 ITEMS_BLOQUE_C = ["p8", "p9"]
 
 BLOQUES = {
     "A": {
-        "titulo": "Diagnóstico de Accesibilidad",
+        "titulo": "Diagnóstico de Accesibilidad y Limitaciones Tecnológicas",
         "items": ITEMS_BLOQUE_A,
         "texto": {
             "p1": "Dificultad de acceso desde dispositivos no-Android",
-            "p2": "Necesidad de acceso multiplataforma vía navegador",
+            "p2": "Indispensabilidad de acceso multiplataforma vía navegador",
             "p3": "Limitación de interacción por falta de compatibilidad",
         },
     },
     "B": {
-        "titulo": "Usabilidad de la PWA",
+        "titulo": "Usabilidad, Interfaz y Experiencia de la PWA",
         "items": ITEMS_BLOQUE_B,
         "texto": {
             "p4": "Interfaz visual atractiva y moderna",
             "p5": "Navegación intuitiva y fácil",
             "p6": "Funcionalidades rápidas y eficientes",
             "p7": "Rendimiento adecuado cross-device",
-            "p7b": "Compatibilidad con navegador habitual",
         },
     },
     "C": {
-        "titulo": "Adopción e Impacto",
+        "titulo": "Intención de Adopción e Impacto en el Ecosistema",
         "items": ITEMS_BLOQUE_C,
         "texto": {
             "p8": "Preferencia PWA por no ocupar almacenamiento",
-            "p9": "Incremento de visibilidad comercial",
+            "p9": "Incremento de visibilidad digital y éxito comercial",
         },
     },
 }

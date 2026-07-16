@@ -25,7 +25,7 @@
         1: ['tiene_app', 'es_emprendedor'],
         2: ['email', 'profesion', 'edad_rango', 'barrio'],
         3: ['p1', 'p2', 'p3'],
-        4: ['p4', 'p5', 'p6', 'p7', 'p7b'],
+        4: ['p4', 'p5', 'p6', 'p7'],
         5: ['p8', 'p9'],
         6: [],
     };
@@ -133,7 +133,6 @@
             p5: parseInt(form.querySelector('input[name="p5"]:checked')?.value || 0),
             p6: parseInt(form.querySelector('input[name="p6"]:checked')?.value || 0),
             p7: parseInt(form.querySelector('input[name="p7"]:checked')?.value || 0),
-            p7b: parseInt(form.querySelector('input[name="p7b"]:checked')?.value || 0),
             p8: parseInt(form.querySelector('input[name="p8"]:checked')?.value || 0),
             p9: parseInt(form.querySelector('input[name="p9"]:checked')?.value || 0),
             p10_mejoras: document.getElementById('p10_mejoras')?.value || '',
