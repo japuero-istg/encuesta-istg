@@ -32,11 +32,11 @@
 
     function mostrarPaso(n) {
         document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
-        document.querySelector(`.step[data-step="${n}"]`).classList.add('active');
+        document.querySelector('.step[data-step="' + n + '"]').classList.add('active');
         pasoActual = n;
 
-        progressFill.style.width = `${((n + 1) / totalPasos) * 100}%`;
-        progressText.textContent = `Paso ${n + 1} de ${totalPasos}: ${titulos[n]}`;
+        progressFill.style.width = ((n + 1) / totalPasos * 100) + '%';
+        progressText.textContent = 'Paso ' + (n + 1) + ' de ' + totalPasos + ': ' + titulos[n];
 
         btnPrev.style.display = n > 0 ? 'inline-block' : 'none';
         btnNext.style.display = n < totalPasos - 1 ? 'inline-block' : 'none';
@@ -63,23 +63,23 @@
                 const el = document.getElementById(campo);
                 valor = el.value.trim();
             } else {
-                const checked = form.querySelector(`input[name="${campo}"]:checked`);
+                const checked = form.querySelector('input[name="' + campo + '"]:checked');
                 valor = checked ? checked.value : null;
             }
 
             if (!valor || valor === '') {
                 valido = false;
-                const errEl = document.getElementById(`${campo}-error`);
+                const errEl = document.getElementById(campo + '-error');
                 if (errEl) {
                     errEl.textContent = 'Esta pregunta es obligatoria';
                 } else {
-                    const group = form.querySelector(`.likert-group[data-field="${campo}"]`);
+                    const group = form.querySelector('.likert-group[data-field="' + campo + '"]');
                     if (group) {
                         group.classList.add('has-error');
                         const span = group.querySelector('.error-msg');
                         if (span) span.textContent = 'Seleccione una opción';
                     } else {
-                        const formGroup = document.getElementById(campo)?.closest('.form-group');
+                        const formGroup = document.getElementById(campo) ? document.getElementById(campo).closest('.form-group') : null;
                         if (formGroup) {
                             const span = formGroup.querySelector('.error-msg');
                             if (span) span.textContent = 'Este campo es obligatorio';
@@ -101,19 +101,19 @@
         return valido;
     }
 
-    btnNext.addEventListener('click', () => {
+    btnNext.addEventListener('click', function() {
         if (validarPaso(pasoActual)) {
             mostrarPaso(pasoActual + 1);
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
     });
 
-    btnPrev.addEventListener('click', () => {
+    btnPrev.addEventListener('click', function() {
         mostrarPaso(pasoActual - 1);
         window.scrollTo({ top: 0, behavior: 'smooth' });
     });
 
-    form.addEventListener('submit', async (e) => {
+    form.addEventListener('submit', async function(e) {
         e.preventDefault();
         if (!validarPaso(pasoActual)) return;
 
@@ -121,21 +121,21 @@
 
         const data = {
             email: document.getElementById('email').value.trim().toLowerCase(),
-            tiene_app: form.querySelector('input[name="tiene_app"]:checked')?.value || '',
-            es_emprendedor: form.querySelector('input[name="es_emprendedor"]:checked')?.value || '',
+            tiene_app: form.querySelector('input[name="tiene_app"]:checked') ? form.querySelector('input[name="tiene_app"]:checked').value : '',
+            es_emprendedor: form.querySelector('input[name="es_emprendedor"]:checked') ? form.querySelector('input[name="es_emprendedor"]:checked').value : '',
             profesion: document.getElementById('profesion').value,
             edad_rango: document.getElementById('edad_rango').value,
             barrio: document.getElementById('barrio').value,
-            p1: parseInt(form.querySelector('input[name="p1"]:checked')?.value || 0),
-            p2: parseInt(form.querySelector('input[name="p2"]:checked')?.value || 0),
-            p3: parseInt(form.querySelector('input[name="p3"]:checked')?.value || 0),
-            p4: parseInt(form.querySelector('input[name="p4"]:checked')?.value || 0),
-            p5: parseInt(form.querySelector('input[name="p5"]:checked')?.value || 0),
-            p6: parseInt(form.querySelector('input[name="p6"]:checked')?.value || 0),
-            p7: parseInt(form.querySelector('input[name="p7"]:checked')?.value || 0),
-            p8: parseInt(form.querySelector('input[name="p8"]:checked')?.value || 0),
-            p9: parseInt(form.querySelector('input[name="p9"]:checked')?.value || 0),
-            p10_mejoras: document.getElementById('p10_mejoras')?.value || '',
+            p1: parseInt(form.querySelector('input[name="p1"]:checked') ? form.querySelector('input[name="p1"]:checked').value : 0),
+            p2: parseInt(form.querySelector('input[name="p2"]:checked') ? form.querySelector('input[name="p2"]:checked').value : 0),
+            p3: parseInt(form.querySelector('input[name="p3"]:checked') ? form.querySelector('input[name="p3"]:checked').value : 0),
+            p4: parseInt(form.querySelector('input[name="p4"]:checked') ? form.querySelector('input[name="p4"]:checked').value : 0),
+            p5: parseInt(form.querySelector('input[name="p5"]:checked') ? form.querySelector('input[name="p5"]:checked').value : 0),
+            p6: parseInt(form.querySelector('input[name="p6"]:checked') ? form.querySelector('input[name="p6"]:checked').value : 0),
+            p7: parseInt(form.querySelector('input[name="p7"]:checked') ? form.querySelector('input[name="p7"]:checked').value : 0),
+            p8: parseInt(form.querySelector('input[name="p8"]:checked') ? form.querySelector('input[name="p8"]:checked').value : 0),
+            p9: parseInt(form.querySelector('input[name="p9"]:checked') ? form.querySelector('input[name="p9"]:checked').value : 0),
+            p10_mejoras: document.getElementById('p10_mejoras') ? document.getElementById('p10_mejoras').value : '',
             duracion_segundos: duracion,
         };
 
@@ -143,14 +143,14 @@
         btnSubmit.textContent = 'Enviando...';
 
         try {
-            const resp = await fetch('/api/submit', {
+            const resp = await fetch('submit.php', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(data),
             });
             const result = await resp.json();
             if (result.ok) {
-                window.location.href = '/gracias';
+                window.location.href = 'gracias.php';
             } else {
                 alert(result.error || 'Error al enviar. Intente de nuevo.');
                 btnSubmit.disabled = false;
@@ -166,9 +166,13 @@
     if (charCount) {
         const ta = document.getElementById('p10_mejoras');
         if (ta) {
-            ta.addEventListener('input', () => { charCount.textContent = ta.value.length; });
+            ta.addEventListener('input', function() { charCount.textContent = ta.value.length; });
         }
     }
+
+    fetch('count.php').then(function(r) { return r.json(); }).then(function(d) {
+        document.getElementById('counterValue').textContent = d.total;
+    }).catch(function() {});
 
     mostrarPaso(0);
 })();

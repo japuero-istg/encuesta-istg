@@ -9,6 +9,7 @@ body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:#f1f5f
 .header-content{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between}
 .header-left,.header-right{display:flex;align-items:center;gap:0.75rem}
 .header-logo{height:50px;width:auto;border-radius:6px;background:#fff;padding:4px}
+.header-right .header-logo{height:70px}
 .header-text{display:flex;flex-direction:column}
 .header-instituto{font-size:0.85rem;font-weight:500;opacity:0.9}
 .header-emprende{font-size:1.1rem;font-weight:700;letter-spacing:0.5px;color:#93c5fd}
