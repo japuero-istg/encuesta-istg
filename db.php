@@ -2,38 +2,48 @@
 require_once __DIR__ . '/config.php';
 
 function db_connect() {
-    $conn = pg_connect(
-        "host=" . DB_HOST .
-        " port=" . DB_PORT .
-        " dbname=" . DB_NAME .
-        " user=" . DB_USER .
-        " password=" . DB_PASS
-    );
-    if (!$conn) {
+    $conn = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME, DB_PORT);
+    if ($conn->connect_error) {
         http_response_code(500);
-        die(json_encode(["error" => "Error de conexión a la base de datos"]));
+        die(json_encode(["error" => "Error de conexión: " . $conn->connect_error]));
     }
+    $conn->set_charset("utf8mb4");
     return $conn;
 }
 
 function db_query($sql, $params = []) {
     $conn = db_connect();
     if (empty($params)) {
-        $result = pg_query($conn, $sql);
+        $result = $conn->query($sql);
     } else {
-        $result = pg_query_params($conn, $sql, $params);
+        $stmt = $conn->prepare($sql);
+        if (!$stmt) {
+            $err = $conn->error;
+            $conn->close();
+            http_response_code(500);
+            die(json_encode(["error" => "Error al preparar: " . $err]));
+        }
+        $types = '';
+        foreach ($params as $p) {
+            if (is_int($p)) $types .= 'i';
+            elseif (is_float($p)) $types .= 'd';
+            else $types .= 's';
+        }
+        $stmt->bind_param($types, ...$params);
+        $result = $stmt->execute() ? $stmt->get_result() : false;
+        $stmt->close();
     }
     if (!$result) {
-        $err = pg_last_error($conn);
-        pg_close($conn);
+        $err = $conn->error;
+        $conn->close();
         http_response_code(500);
         die(json_encode(["error" => "Error en la consulta: " . $err]));
     }
     $rows = [];
-    while ($row = pg_fetch_assoc($result)) {
+    while ($row = $result->fetch_assoc()) {
         $rows[] = $row;
     }
-    pg_close($conn);
+    $conn->close();
     return $rows;
 }
 
@@ -51,19 +61,29 @@ function db_query_val($sql, $params = []) {
 function db_insert($sql, $params = []) {
     $conn = db_connect();
     if (empty($params)) {
-        $result = pg_query($conn, $sql);
+        $result = $conn->query($sql);
+        $id = $conn->insert_id;
     } else {
-        $result = pg_query_params($conn, $sql, $params);
+        $stmt = $conn->prepare($sql);
+        if (!$stmt) {
+            $err = $conn->error;
+            $conn->close();
+            http_response_code(500);
+            die(json_encode(["error" => "Error al preparar: " . $err]));
+        }
+        $types = '';
+        foreach ($params as $p) {
+            if (is_int($p)) $types .= 'i';
+            elseif (is_float($p)) $types .= 'd';
+            else $types .= 's';
+        }
+        $stmt->bind_param($types, ...$params);
+        $stmt->execute();
+        $id = $stmt->insert_id;
+        $stmt->close();
     }
-    if (!$result) {
-        $err = pg_last_error($conn);
-        pg_close($conn);
-        http_response_code(500);
-        die(json_encode(["error" => "Error al insertar: " . $err]));
-    }
-    $row = pg_fetch_assoc($result);
-    pg_close($conn);
-    return $row ? reset($row) : null;
+    $conn->close();
+    return $id > 0 ? $id : null;
 }
 
 function check_auth() {

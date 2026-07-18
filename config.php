@@ -1,9 +1,9 @@
 <?php
 define('DB_HOST', 'localhost');
-define('DB_PORT', '5432');
+define('DB_PORT', 3306);
 define('DB_NAME', 'encuesta_istg');
-define('DB_USER', 'admin');
-define('DB_PASS', 'admin123');
+define('DB_USER', 'root');
+define('DB_PASS', '');
 define('ADMIN_USER', 'admin');
 define('ADMIN_PASS', 'istg2026');
 
