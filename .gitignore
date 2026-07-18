@@ -1,35 +1,16 @@
-# Python
-__pycache__/
-*.py[cod]
-*.egg-info/
-.eggs/
-dist/
-build/
-*.egg
-
-# Environment
-.env
-.venv/
-venv/
-env/
-
 # IDE
 .vscode/*
 !.vscode/extensions.json
 .idea
 .DS_Store
-
-# Dependencies
-node_modules/
+.run/
 
 # Datos privados
-respuestas.json
 *.log
-
-# Render
-render.yaml
 
 # Documentación técnica (no se sube)
 DOCUMENTO_TECNICO.md
 DOCUMENTO_TECNICO.docx
-generar_docx.py
+
+# PHP
+vendor/
